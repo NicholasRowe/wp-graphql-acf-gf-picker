@@ -42,11 +42,12 @@ add_filter('wpgraphql_acf_register_graphql_field', function ($field_config, $typ
         }
 
         if (!empty($value)) {
-            $form = $context->get_loader('form')->load_deferred($value);
+            $form = $context->get_loader(\WPGraphQL\GF\Data\Loader\FormsLoader::$name)->load_deferred($value);
         }
 
         return !empty($form) ? $form : null;
     };
+
 
     return $field_config;
 
