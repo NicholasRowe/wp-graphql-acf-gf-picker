@@ -42,13 +42,14 @@ add_filter('wpgraphql_acf_register_graphql_field', function ($field_config, $typ
 
 
         // wp_send_json( [  $acf_field ] );
-
-        // $value = $root['attributes']['data']["gf_acf_picker"];
-
+        
         // should I use a more dynamic value from $acf_field here?
-        if ( isset ( $root['attributes']['data']["gf_acf_picker"] ) ) {
-            $value = $root[ $root['attributes']['data']["gf_acf_picker"] ];
-        }
+        $value = $root['attributes']['data']["gf_acf_picker"];
+
+        
+        // if ( isset ( $root['attributes']['data']["gf_acf_picker"] ) ) {
+        //     $value = $root[ $root['attributes']['data']["gf_acf_picker"] ];
+        // }
 
         if (!empty($value)) {
             $form = $context->get_loader(\WPGraphQL\GF\Data\Loader\FormsLoader::$name)->load_deferred($value);
