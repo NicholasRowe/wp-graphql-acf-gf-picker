@@ -42,11 +42,12 @@ add_filter('wpgraphql_acf_register_graphql_field', function ($field_config, $typ
 
 
         // wp_send_json( [  $acf_field ] );
-        
-        // should I use a more dynamic value from $acf_field here?
+
+        // Ideally use a more dynamic value from $acf_field here..
         $value = $root['attributes']['data']["gf_acf_picker"];
 
-        
+        // Will need to check for $root keys using isset here, but $value var currently not set if using isset
+        // below returns "gfAcfPicker": null
         // if ( isset ( $root['attributes']['data']["gf_acf_picker"] ) ) {
         //     $value = $root[ $root['attributes']['data']["gf_acf_picker"] ];
         // }
