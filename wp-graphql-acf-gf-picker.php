@@ -32,13 +32,22 @@ add_filter('wpgraphql_acf_register_graphql_field', function ($field_config, $typ
     }
 
     // define data type
-    $field_config['type'] = 'Form';
+    $field_config['type'] = 'GfForm';
+
+    
 
 
     // add resolver
-    $field_config['resolve'] = function ($root, $args, $context) use ($acf_field) {
-        if (array_key_exists($acf_field['key'], $root)) {
-            $value = $root[$acf_field['key']];
+    $field_config['resolve'] = function ($root, $args, \WPGraphQL\AppContext $context, $info) use ($acf_field) {
+
+
+        // wp_send_json( [  $acf_field ] );
+
+        // $value = $root['attributes']['data']["gf_acf_picker"];
+
+        // should I use a more dynamic value from $acf_field here?
+        if ( isset ( $root['attributes']['data']["gf_acf_picker"] ) ) {
+            $value = $root[ $root['attributes']['data']["gf_acf_picker"] ];
         }
 
         if (!empty($value)) {
@@ -48,6 +57,7 @@ add_filter('wpgraphql_acf_register_graphql_field', function ($field_config, $typ
         return !empty($form) ? $form : null;
     };
 
+    
 
     return $field_config;
 
